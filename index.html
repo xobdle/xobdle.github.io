@@ -1144,6 +1144,142 @@
       }
     }
 
+
+    /* FINAL cooking-page layout: center the actual kadai at 50% of viewport height */
+    #statusPage.status-page {
+      position: relative;
+      width: min(460px, 100vw);
+      height: calc(100dvh - 8px);
+      min-height: 0;
+      flex: 0 0 auto;
+      margin: 0 auto;
+      padding: 0 12px;
+      transform: none !important;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    #statusPage .brand {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      z-index: 5;
+    }
+
+    #statusPage .status-help-button {
+      top: 19px;
+      right: 16px;
+    }
+
+    #statusPage .status-card {
+      position: static;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    /* Make the scene span the whole status page */
+    #statusPage .cooking-scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      transform: none;
+      pointer-events: none;
+    }
+
+    /* Centre the complete kadai assembly exactly at 50% viewport height */
+    #statusPage .cooking-kadai-wrap {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+    }
+
+    /* Steam sits immediately above the centred kadai */
+    #statusPage .cooking-steam {
+      left: 50%;
+      top: calc(50% - 128px);
+      transform: translateX(-50%);
+    }
+
+    #statusPage .cooking-message {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 92px);
+      transform: translateX(-50%);
+      width: min(340px, calc(100% - 32px));
+      max-width: none;
+      margin: 0;
+    }
+
+    #statusPage .cooking-feedback {
+      position: absolute;
+      left: 50%;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(360px, calc(100% - 28px));
+      max-width: none;
+      margin: 0;
+      padding-top: 11px;
+      border-top: 1px solid #efebe5;
+    }
+
+    @media (max-width: 420px) {
+      #statusPage .cooking-kadai-wrap {
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%) scale(0.92);
+        transform-origin: center center;
+      }
+
+      #statusPage .cooking-steam {
+        top: calc(50% - 120px);
+      }
+
+      #statusPage .cooking-message {
+        top: calc(50% + 86px);
+        font-size: 16px;
+      }
+    }
+
+    @media (max-height: 620px) {
+      #statusPage .brand {
+        top: 14px;
+      }
+
+      #statusPage .status-help-button {
+        top: 13px;
+      }
+
+      #statusPage .cooking-kadai-wrap {
+        top: 48%;
+        transform: translate(-50%, -50%) scale(0.88);
+      }
+
+      #statusPage .cooking-steam {
+        top: calc(48% - 112px);
+      }
+
+      #statusPage .cooking-message {
+        top: calc(48% + 78px);
+        font-size: 14px;
+      }
+
+      #statusPage .cooking-feedback {
+        bottom: max(8px, env(safe-area-inset-bottom));
+        padding-top: 8px;
+      }
+    }
+
   </style>
   <script data-goatcounter="https://xobdle.goatcounter.com/count"
           async src="https://gc.zgo.at/count.js"></script>
