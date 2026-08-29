@@ -550,7 +550,7 @@ function showResult() {
   if (wonGame) {
   resultTime.innerHTML =
     "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳<br>" +
-    "Visit again tomorrow for a new Xobdle 😊";
+    "A new Xobdle is served every day at 6:00 AM IST 🍳";
 
   resultTime.style.display = "";
   resultSocial.style.display = "";
