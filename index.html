@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
-  <title>Xobdle.org | Daily Assamese Word Game</title>
+  <title>Xobdle.org — Daily Assamese Word Game</title>
 
   <meta name="description" content="Xobdle is a free daily Assamese word game. Guess the five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -14,7 +14,7 @@
 
   <link rel="canonical" href="https://xobdle.org/">
 
-  <meta property="og:title" content="Xobdle.org | Daily Assamese Word Game">
+  <meta property="og:title" content="Xobdle.org — Daily Assamese Word Game">
   <meta property="og:description" content="Guess today's five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://xobdle.org/">
@@ -22,7 +22,7 @@
   <meta property="og:locale" content="as_IN">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Xobdle.org | Daily Assamese Word Game">
+  <meta name="twitter:title" content="Xobdle.org — Daily Assamese Word Game">
   <meta name="twitter:description" content="Guess today's five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
 
   <script type="application/ld+json">
@@ -1117,6 +1117,30 @@
         max-width: 330px;
         font-size: 16px;
         line-height: 1.5;
+      }
+    }
+
+
+    /* Keep the cooking illustration truly centered on the page */
+    #statusPage .cooking-scene {
+      width: 100%;
+      max-width: none;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #statusPage .cooking-kadai-wrap {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 420px) {
+      #statusPage .cooking-kadai-wrap {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) scale(0.92);
+        transform-origin: center bottom;
       }
     }
 
