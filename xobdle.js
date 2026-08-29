@@ -123,10 +123,10 @@ async function fetchPuzzleState() {
 }
 
 async function checkGuessWithAPI(guess) {
-  const response = await fetch(API_URL, {
+  const response = await fetch(API_URL + "/guess", {
     method: "POST",
     headers: {
-      "Content-Type": "text/plain;charset=utf-8"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({ guess })
   });
