@@ -511,7 +511,8 @@ function showResult() {
   const resultSocial = document.querySelector(".result-social");
 
   if (wonGame) {
-    resultTime.textContent = "Done in " + formatElapsedWords(elapsedSeconds) + " today!";
+    resultTime.textContent =
+      "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳 Visit again tomorrow for a new Xobdle 😊";
     resultTime.style.display = "";
     resultSocial.style.display = "";
   } else {
