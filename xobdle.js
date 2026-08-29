@@ -1,24 +1,12 @@
 document.documentElement.style.visibility = "hidden";
 
-const puzzleDate = "2026-08-29";
+const API_URL = "https://script.google.com/macros/s/AKfycbzu794lhHxtZJBCFqSZ4hOEIL87iroOY2fb6zt3xZOxNYUeYmAgakGKoQQt2QocfktkLQ/exec";
 
-const answer = ["অ", "দ", "ম", "নী", "য়"];
-
-const keys = [
-  "যো","না","ক","দ","ৰি","সা","নি",
-  "ভা","ল","নী","গ","ধি","পা","ব",
-  "য়া","তো","অ","কা","ষি","ন","ম",
-  "নু","ৰ","সি","ন্দা","ত","য়","ধা"
-];
-
-const yesterdayAnswer = "বৰফুকন";
-
-const keyboardRows = [
-  keys.slice(0, 8),
-  keys.slice(8, 16),
-  keys.slice(16, 24),
-  keys.slice(24, 28)
-];
+let puzzleDate = null;
+let keys = [];
+let yesterdayAnswer = "";
+let keyboardRows = [];
+let apiState = "loading";
 
 const MAX_GUESSES = 5;
 const WORD_LENGTH = 5;
@@ -92,15 +80,59 @@ function todayStorageKey() {
 }
 
 function getSiteState() {
-  const now = getISTNowParts();
-  const today = isoDateFromParts(now);
+  return apiState;
+}
 
-  // After midnight IST, yesterday's puzzle is no longer active.
-  // Until today's puzzleDate is uploaded, show the cooking screen.
-  if (puzzleDate !== today) return "cooking";
+async function fetchPuzzleState() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      cache: "no-store"
+    });
 
-  // As soon as puzzleDate matches today's IST date, the puzzle is live.
-  return "live";
+    if (!response.ok) throw new Error("Puzzle request failed.");
+
+    const data = await response.json();
+
+    if (data.status === "live") {
+      apiState = "live";
+      puzzleDate = data.date || getISTISODate(0);
+      keys = Array.isArray(data.keys) ? data.keys : [];
+      yesterdayAnswer = data.yesterdayAnswer || "";
+
+      keyboardRows = [
+        keys.slice(0, 8),
+        keys.slice(8, 16),
+        keys.slice(16, 24),
+        keys.slice(24, 28)
+      ];
+    } else {
+      apiState = "cooking";
+      puzzleDate = null;
+      keys = [];
+      yesterdayAnswer = "";
+      keyboardRows = [];
+    }
+
+    return data;
+  } catch (error) {
+    console.warn("Could not load Xobdle API:", error);
+    apiState = "cooking";
+    return { status: "cooking" };
+  }
+}
+
+async function checkGuessWithAPI(guess) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({ guess })
+  });
+
+  if (!response.ok) throw new Error("Guess request failed.");
+  return await response.json();
 }
 
 function showStatusPage() {
@@ -189,8 +221,10 @@ const yesterdayOverlay = document.getElementById("yesterdayOverlay");
 const yesterdayBtn = document.getElementById("yesterdayBtn");
 const yesterdayClose = document.getElementById("yesterdayClose");
 
-document.getElementById("yesterdayDate").textContent = formattedISTDate(-1);
-document.getElementById("yesterdayAnswer").textContent = yesterdayAnswer;
+function updateYesterdayPopup() {
+  document.getElementById("yesterdayDate").textContent = formattedISTDate(-1);
+  document.getElementById("yesterdayAnswer").textContent = yesterdayAnswer || "";
+}
 
 yesterdayBtn.addEventListener("click", () => yesterdayOverlay.classList.remove("hidden"));
 yesterdayClose.addEventListener("click", () => yesterdayOverlay.classList.add("hidden"));
@@ -220,7 +254,15 @@ instructionsOverlay.addEventListener("click", event => {
 });
 
 function formattedDate() {
-  return formattedISTDate(0);
+  if (!puzzleDate) return formattedISTDate(0);
+
+  const [y, m, d] = puzzleDate.split("-").map(Number);
+  return new Intl.DateTimeFormat("en-AU", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "Asia/Kolkata"
+  }).format(new Date(Date.UTC(y, m - 1, d, 12, 0, 0)));
 }
 
 function buildBoard() {
@@ -326,31 +368,7 @@ function backspace() {
   refitSoon();
 }
 
-function evaluateGuess(guess, target) {
-  const result = Array(WORD_LENGTH).fill("absent");
-  const used = Array(WORD_LENGTH).fill(false);
-
-  for (let i = 0; i < WORD_LENGTH; i++) {
-    if (guess[i] === target[i]) {
-      result[i] = "correct";
-      used[i] = true;
-    }
-  }
-
-  for (let i = 0; i < WORD_LENGTH; i++) {
-    if (result[i] === "correct") continue;
-    for (let j = 0; j < WORD_LENGTH; j++) {
-      if (!used[j] && guess[i] === target[j]) {
-        result[i] = "present";
-        used[j] = true;
-        break;
-      }
-    }
-  }
-  return result;
-}
-
-function submitGuess() {
+async function submitGuess() {
   if (gameOver || getSiteState() !== "live") return;
   if (currentGuess.length !== WORD_LENGTH) {
     message.textContent = "";
@@ -358,36 +376,55 @@ function submitGuess() {
   }
 
   const guess = [...currentGuess];
-  const evaluation = evaluateGuess(guess, answer);
-  guesses.push(guess);
-  evaluations.push(evaluation);
-  currentGuess = [];
 
-  saveTodayState();
-  renderBoard();
-  updateKeyboardStatuses();
+  try {
+    const data = await checkGuessWithAPI(guess);
 
-  const won = evaluation.every(status => status === "correct");
+    if (data.status !== "live") {
+      apiState = "cooking";
+      showStatusPage();
+      return;
+    }
 
-  if (won) {
-    gameOver = true;
-    stopGameTimer();
-    message.textContent = "";
+    if (!Array.isArray(data.result) || data.result.length !== WORD_LENGTH) {
+      throw new Error("Invalid evaluation returned by API.");
+    }
+
+    const evaluation = data.result;
+
+    guesses.push(guess);
+    evaluations.push(evaluation);
+    currentGuess = [];
+
     saveTodayState();
-    window.setTimeout(() => animateWinningRow(guesses.length - 1), 120);
-    window.setTimeout(showResult, 3000);
-    return;
-  }
+    renderBoard();
+    updateKeyboardStatuses();
 
-  if (guesses.length >= MAX_GUESSES) {
-    gameOver = true;
-    stopGameTimer();
+    const won = Boolean(data.won);
+
+    if (won) {
+      gameOver = true;
+      stopGameTimer();
+      message.textContent = "";
+      saveTodayState();
+      window.setTimeout(() => animateWinningRow(guesses.length - 1), 120);
+      window.setTimeout(showResult, 3000);
+      return;
+    }
+
+    if (guesses.length >= MAX_GUESSES) {
+      gameOver = true;
+      stopGameTimer();
+      message.textContent = "";
+      saveTodayState();
+      setTimeout(showResult, 5000);
+    }
+
+    refitSoon();
+  } catch (error) {
+    console.warn("Could not check guess:", error);
     message.textContent = "";
-    saveTodayState();
-    setTimeout(showResult, 5000);
   }
-
-  refitSoon();
 }
 
 function statusRank(status) {
@@ -493,8 +530,8 @@ function renderResultGrid() {
 }
 
 function didWin() {
-  return guesses.some(
-    guess => guess.every((akshara, index) => akshara === answer[index])
+  return evaluations.some(
+    row => Array.isArray(row) && row.every(status => status === "correct")
   );
 }
 
@@ -706,57 +743,60 @@ function refitSoon() {
   requestAnimationFrame(() => requestAnimationFrame(fitActivePage));
 }
 
-document.getElementById("gameDate").textContent = formattedDate();
 document.getElementById("shareBtn").addEventListener("click", sharePNG);
 document.getElementById("saveBtn").addEventListener("click", savePNG);
 
 buildBoard();
-buildKeyboard();
 renderBoard();
 updateTimerDisplay();
 
-const siteState = getSiteState();
+async function initializeXobdle() {
+  const data = await fetchPuzzleState();
 
-if (siteState === "live") {
-  const restoredToday = restoreTodayState();
+  if (data.status === "live") {
+    document.getElementById("gameDate").textContent = formattedDate();
+    updateYesterdayPopup();
+    buildKeyboard();
 
-  if (restoredToday) {
-    if (gameStartedAt && !gameOver) startGameTimer();
+    const restoredToday = restoreTodayState();
+
+    if (restoredToday) {
+      if (gameStartedAt && !gameOver) startGameTimer();
+    } else {
+      document.getElementById("statusPage").classList.add("hidden");
+      document.getElementById("resultPage").classList.add("hidden");
+      document.getElementById("gamePage").classList.remove("hidden");
+    }
+
+    if (!gameOver && !localStorage.getItem("xobdleInstructionsSeen")) {
+      openInstructions();
+    }
   } else {
-    document.getElementById("statusPage").classList.add("hidden");
-    document.getElementById("resultPage").classList.add("hidden");
-    document.getElementById("gamePage").classList.remove("hidden");
+    showStatusPage();
   }
 
-  if (!gameOver && !localStorage.getItem("xobdleInstructionsSeen")) {
-    openInstructions();
-  }
-} else {
-  showStatusPage();
+  document.documentElement.style.visibility = "visible";
+  refitSoon();
 }
 
-// Reveal only after the correct startup page has been selected.
-document.documentElement.style.visibility = "visible";
+initializeXobdle();
 
-// Re-check the site while the page remains open.
-// If the cooking page is showing, reload every 60 seconds so a newly
-// uploaded daily JS can become available without the visitor refreshing.
-window.setInterval(() => {
-  const state = getSiteState();
+window.setInterval(async () => {
+  if (apiState === "cooking") {
+    const data = await fetchPuzzleState();
+    if (data.status === "live") location.reload();
+    return;
+  }
 
-  if (state !== "live") {
+  if (puzzleDate && puzzleDate !== getISTISODate(0)) {
+    apiState = "cooking";
+
     if (timerInterval) {
       clearInterval(timerInterval);
       timerInterval = null;
     }
 
     showStatusPage();
-
-    if (!document.getElementById("statusPage").classList.contains("hidden")) {
-      location.reload();
-    }
-  } else if (!document.getElementById("statusPage").classList.contains("hidden")) {
-    location.reload();
   }
 }, 60000);
 
