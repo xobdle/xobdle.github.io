@@ -793,7 +793,11 @@
   </div>
 
   <canvas id="resultCanvas" width="1080" height="1350"></canvas>
-  <script src="xobdle.js"></script>
+  <script>
+  const xobdleScript = document.createElement("script");
+  xobdleScript.src = "xobdle.js?v=" + Date.now();
+  document.body.appendChild(xobdleScript);
+</script>
  
 </body>
 </html>
