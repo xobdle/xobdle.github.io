@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
-  <title>Xobdle.org — Daily Assamese Word Game</title>
+  <title>Xobdle.org | Daily Assamese Word Game</title>
 
   <meta name="description" content="Xobdle is a free daily Assamese word game. Guess the five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -14,7 +14,7 @@
 
   <link rel="canonical" href="https://xobdle.org/">
 
-  <meta property="og:title" content="Xobdle.org — Daily Assamese Word Game">
+  <meta property="og:title" content="Xobdle.org | Daily Assamese Word Game">
   <meta property="og:description" content="Guess today's five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://xobdle.org/">
@@ -22,7 +22,7 @@
   <meta property="og:locale" content="as_IN">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Xobdle.org — Daily Assamese Word Game">
+  <meta name="twitter:title" content="Xobdle.org | Daily Assamese Word Game">
   <meta name="twitter:description" content="Guess today's five-akshara Assamese word in five tries. A new Xobdle is served every day at 6:00 AM IST.">
 
   <script type="application/ld+json">
@@ -150,6 +150,17 @@
       color: #d96f32;
       margin-left: 0;
       vertical-align: baseline;
+    }
+
+    .ist-clock {
+      margin-top: 8px;
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #8b877f;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.1px;
     }
 
     .game-date {
@@ -1163,6 +1174,7 @@
 
       <header class="brand">
         <h1 class="xobdle-logo">Xobdle<span>.org</span></h1>
+        <div id="istClock" class="ist-clock" aria-label="Current time in India">00:00:00 IST</div>
       </header>
 
       <section class="status-card">
@@ -1296,6 +1308,26 @@
   </div>
 
   <canvas id="resultCanvas" width="1080" height="1350"></canvas>
+  <script>
+    function updateISTClock() {
+      const clock = document.getElementById("istClock");
+      if (!clock) return;
+
+      const time = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23"
+      }).format(new Date());
+
+      clock.textContent = time + " IST";
+    }
+
+    updateISTClock();
+    setInterval(updateISTClock, 1000);
+  </script>
+
   <script>
   const xobdleScript = document.createElement("script");
   xobdleScript.src = "xobdle.js?v=" + Date.now();
