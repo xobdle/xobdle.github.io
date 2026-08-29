@@ -548,15 +548,17 @@ function showResult() {
   const resultSocial = document.querySelector(".result-social");
 
   if (wonGame) {
-    resultTime.textContent =
-      "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳 Visit again tomorrow for a new Xobdle 😊";
-    resultTime.style.display = "";
-    resultSocial.style.display = "";
-  } else {
-    resultTime.textContent = "";
-    resultTime.style.display = "none";
-    resultSocial.style.display = "none";
-  }
+  resultTime.innerHTML =
+    "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳<br>" +
+    "Visit again tomorrow for a new Xobdle 😊";
+
+  resultTime.style.display = "";
+  resultSocial.style.display = "";
+} else {
+  resultTime.textContent = "";
+  resultTime.style.display = "none";
+  resultSocial.style.display = "none";
+}
 
   renderResultGrid();
   document.getElementById("shareNote").textContent = "";
