@@ -1,6 +1,6 @@
 document.documentElement.style.visibility = "hidden";
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzu794lhHxtZJBCFqSZ4hOEIL87iroOY2fb6zt3xZOxNYUeYmAgakGKoQQt2QocfktkLQ/exec";
+const API_URL = "https://xobdle-api.supportxobdle.workers.dev";
 
 let puzzleDate = null;
 let keys = [];
@@ -85,7 +85,7 @@ function getSiteState() {
 
 async function fetchPuzzleState() {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL + "/puzzle", {
       method: "GET",
       cache: "no-store"
     });
