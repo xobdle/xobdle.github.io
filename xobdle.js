@@ -1,6 +1,6 @@
 document.documentElement.style.visibility = "hidden";
 
-const puzzleDate = "2026-08-30";
+const puzzleDate = "2026-08-29";
 
 const answer = ["গা", "মো", "চা", "খ", "ন"];
 
