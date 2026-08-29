@@ -2,7 +2,7 @@
 <html lang="as">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>Xobdle</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -639,28 +639,350 @@
   
     .status-page {
       text-align: center;
+      padding-top: 22px;
+    }
+
+    .status-page .brand {
+      position: relative;
+      z-index: 5;
+    }
+
+    .status-help-button {
+      position: absolute;
+      top: 19px;
+      right: 16px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid #dedad4;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #77726b;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
     }
 
     .status-card {
       width: 100%;
       max-width: 390px;
-      margin: 70px auto 0;
+      margin: 2px auto 0;
       background: #ffffff;
-      padding: 30px 24px;
+      padding: 0 18px 18px;
       text-align: center;
     }
 
-    .status-title {
-      margin: 0;
-      font-size: 38px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -1px;
+    .cooking-scene {
+      position: relative;
+      width: 100%;
+      height: 205px;
+      margin: 0 auto 4px;
     }
 
-    .status-message {
-      margin: 34px auto 0;
-      max-width: 310px;
+    .cooking-steam {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 150px;
+      height: 100px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cooking-steam-wave {
+      position: absolute;
+      bottom: 0;
+      width: 24px;
+      height: 58px;
+      opacity: 0;
+      animation: xobdleSteamRise 3s ease-in-out infinite;
+    }
+
+    .cooking-steam-wave::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 3px solid rgba(110, 110, 110, 0.22);
+      border-radius: 50% 0 0 50%;
+      transform: skewX(-12deg);
+    }
+
+    .cooking-steam-wave::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 17px;
+      width: 16px;
+      height: 32px;
+      border-right: 3px solid rgba(110, 110, 110, 0.22);
+      border-radius: 0 50% 50% 0;
+      transform: skewX(10deg);
+    }
+
+    .cooking-steam-wave:nth-child(1) {
+      left: 27px;
+      animation-delay: 0s;
+    }
+
+    .cooking-steam-wave:nth-child(2) {
+      left: 65px;
+      animation-delay: 0.9s;
+    }
+
+    .cooking-steam-wave:nth-child(3) {
+      left: 105px;
+      animation-delay: 1.7s;
+    }
+
+    @keyframes xobdleSteamRise {
+      0% {
+        transform: translateY(20px) translateX(0) scale(0.82);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.35;
+      }
+
+      45% {
+        transform: translateY(-3px) translateX(5px) scale(0.95);
+      }
+
+      70% {
+        transform: translateY(-27px) translateX(-5px) scale(1);
+        opacity: 0.22;
+      }
+
+      100% {
+        transform: translateY(-52px) translateX(5px) scale(1.05);
+        opacity: 0;
+      }
+    }
+
+    .cooking-kadai-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      width: 310px;
+      height: 130px;
+      transform: translateX(-50%);
+    }
+
+    .cooking-handle {
+      position: absolute;
+      bottom: 48px;
+      width: 64px;
+      height: 27px;
+      border: 6px solid #202020;
+      background: #ffffff;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .cooking-handle.left {
+      left: 4px;
+      transform: rotate(-8deg);
+    }
+
+    .cooking-handle.right {
+      right: 4px;
+      transform: rotate(8deg);
+    }
+
+    .cooking-connector {
+      position: absolute;
+      bottom: 53px;
+      width: 28px;
+      height: 16px;
+      background: #202020;
+      border-radius: 999px;
+      z-index: 1;
+    }
+
+    .cooking-connector.left {
+      left: 49px;
+      transform: rotate(-5deg);
+    }
+
+    .cooking-connector.right {
+      right: 49px;
+      transform: rotate(5deg);
+    }
+
+    .cooking-rivet {
+      position: absolute;
+      bottom: 55px;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border: 3px solid #202020;
+      border-radius: 50%;
+      z-index: 5;
+    }
+
+    .cooking-rivet.left {
+      left: 58px;
+    }
+
+    .cooking-rivet.right {
+      right: 58px;
+    }
+
+    .cooking-kadai {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 200px;
+      height: 82px;
+      transform: translateX(-50%);
+      border: 5px solid #202020;
+      border-top-width: 4px;
+      border-radius: 18px 18px 95px 95px;
+      background: #ffffff;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .cooking-water {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 52%;
+      background: #dff3f8;
+      z-index: 1;
+    }
+
+    .cooking-water::before {
+      content: "";
+      position: absolute;
+      left: -4%;
+      top: -9px;
+      width: 108%;
+      height: 18px;
+      background: #dff3f8;
+      border-radius: 50%;
+      border-top: 2px solid rgba(80, 160, 180, 0.23);
+    }
+
+    .cooking-water::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 3px;
+      width: 82px;
+      height: 8px;
+      transform: translateX(-50%);
+      border-top: 2px solid rgba(80, 160, 180, 0.18);
+      border-radius: 50%;
+    }
+
+    .cooking-letters {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      width: 158px;
+      height: 48px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .cooking-letter {
+      display: inline-block;
+      color: #202020;
+      font-family: "Noto Sans Bengali", sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      transform-origin: center bottom;
+      animation: xobdleLetterDance 2.8s ease-in-out infinite;
+    }
+
+    .cooking-letter:nth-child(1) { animation-delay: 0s; }
+    .cooking-letter:nth-child(2) { animation-delay: -0.7s; }
+    .cooking-letter:nth-child(3) { animation-delay: -1.4s; }
+    .cooking-letter:nth-child(4) { animation-delay: -2.1s; }
+
+    @keyframes xobdleLetterDance {
+      0%,
+      100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+
+      20% {
+        transform: translateY(-4px) translateX(2px) rotate(-4deg);
+      }
+
+      40% {
+        transform: translateY(-1px) translateX(3px) rotate(2deg);
+      }
+
+      60% {
+        transform: translateY(-6px) translateX(-2px) rotate(4deg);
+      }
+
+      80% {
+        transform: translateY(-2px) translateX(-3px) rotate(-2deg);
+      }
+    }
+
+    .cooking-bubble {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(80, 160, 180, 0.55);
+      opacity: 0;
+      z-index: 3;
+      animation: xobdleBubblePop 2.4s ease-out infinite;
+    }
+
+    .cooking-bubble.one {
+      left: calc(50% - 55px);
+      bottom: 28px;
+      animation-delay: 0s;
+    }
+
+    .cooking-bubble.two {
+      left: 50%;
+      bottom: 25px;
+      animation-delay: 0.8s;
+    }
+
+    .cooking-bubble.three {
+      left: calc(50% + 50px);
+      bottom: 30px;
+      animation-delay: 1.6s;
+    }
+
+    @keyframes xobdleBubblePop {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(-30px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .cooking-message {
+      margin: 2px auto 0;
+      max-width: 330px;
       font-family: "Poppins", sans-serif;
       font-size: 17px;
       line-height: 1.55;
@@ -668,13 +990,55 @@
       color: #202020;
     }
 
-    .status-submessage {
-      margin: 10px auto 0;
-      max-width: 310px;
+    .cooking-feedback {
+      margin: 11px auto 0;
+      max-width: 330px;
       font-family: "Poppins", sans-serif;
       font-size: 12px;
       line-height: 1.5;
       color: #8b877f;
+    }
+
+    .cooking-feedback a {
+      color: #8b877f;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cooking-feedback a:visited {
+      color: #8b877f;
+    }
+
+    /*
+      The existing JS still writes to these two elements.
+      They remain in the HTML for compatibility, but the new
+      cooking screen uses its own static message and feedback.
+    */
+    .status-message,
+    .status-submessage {
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      .status-card {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .cooking-scene {
+        height: 190px;
+      }
+
+      .cooking-kadai-wrap {
+        transform: translateX(-50%) scale(0.92);
+        transform-origin: center bottom;
+      }
+
+      .cooking-message {
+        max-width: 330px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
     }
 
   </style>
@@ -708,13 +1072,69 @@
 
     <!-- CLOSED / COOKING PAGE -->
     <main id="statusPage" class="page status-page hidden">
+
+      <button
+        class="status-help-button"
+        type="button"
+        aria-label="How to play"
+        onclick="document.getElementById('instructionsOverlay').classList.remove('hidden')"
+      >?</button>
+
       <header class="brand">
-        <h1 class="xobdle-logo">Xobdle<span></h1>
+        <h1 class="xobdle-logo">Xobdle</h1>
       </header>
 
       <section class="status-card">
-        <div id="statusMessage" class="status-message"></div>
+
+        <div class="cooking-scene" aria-hidden="true">
+
+          <div class="cooking-steam">
+            <div class="cooking-steam-wave"></div>
+            <div class="cooking-steam-wave"></div>
+            <div class="cooking-steam-wave"></div>
+          </div>
+
+          <div class="cooking-kadai-wrap">
+
+            <div class="cooking-handle left"></div>
+            <div class="cooking-connector left"></div>
+            <div class="cooking-rivet left"></div>
+
+            <div class="cooking-handle right"></div>
+            <div class="cooking-connector right"></div>
+            <div class="cooking-rivet right"></div>
+
+            <div class="cooking-bubble one"></div>
+            <div class="cooking-bubble two"></div>
+            <div class="cooking-bubble three"></div>
+
+            <div class="cooking-letters">
+              <span class="cooking-letter">অ</span>
+              <span class="cooking-letter">আ</span>
+              <span class="cooking-letter">ক</span>
+              <span class="cooking-letter">খ</span>
+            </div>
+
+            <div class="cooking-kadai">
+              <div class="cooking-water"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="cooking-message">
+          Xobdle is being cooked and will be served at 6:00 AM IST. 🍳
+        </div>
+
+        <div class="cooking-feedback">
+          Feedback:
+          <a href="mailto:xobdlesupport@gmail.com">xobdlesupport@gmail.com</a>
+        </div>
+
+        <!-- Kept for compatibility with the existing xobdle.js -->
+        <div id="statusMessage" class="status-message" aria-live="polite"></div>
         <div id="statusSubmessage" class="status-submessage"></div>
+
       </section>
     </main>
 
