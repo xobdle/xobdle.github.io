@@ -1563,6 +1563,35 @@
       .entry-feedback { margin-top: 7px; padding-top: 7px; font-size: 10px; }
     }
 
+
+    .entry-hint-wrap {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .entry-hint-button {
+      border: 0;
+      background: transparent;
+      padding: 2px 4px;
+      color: #d96f32;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .entry-hint-text {
+      width: min(320px, 100%);
+      margin: 8px auto 0;
+      font-family: "Noto Sans Bengali", sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: #55514c;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .entry-start::after { animation: none; }
     }
@@ -1598,6 +1627,11 @@
       <section class="entry-main">
         <p class="entry-ready">Ready for today’s Xobdle?</p>
         <button id="startTodayBtn" class="entry-start" type="button">START</button>
+
+        <div class="entry-hint-wrap">
+          <button id="entryHintBtn" class="entry-hint-button" type="button">Get a hint</button>
+          <div id="entryHintText" class="entry-hint-text hidden" aria-live="polite"></div>
+        </div>
       </section>
 
       <section class="entry-bottom">
