@@ -666,14 +666,14 @@ async function createResultPNG() {
     ctx.fillText(
       getXobdleRank(),
       W / 2,
-      1050
+      1110
     );
 
     ctx.font = '600 34px "Poppins", sans-serif';
     ctx.fillText(
       "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳",
       W / 2,
-      1110
+      1165
     );
 
     ctx.fillStyle = COLORS.muted;
@@ -681,7 +681,7 @@ async function createResultPNG() {
     ctx.fillText(
       "A new Xobdle is served every day at 6:00 AM IST 🍳",
       W / 2,
-      1170
+      1220
     );
   } else {
     ctx.textAlign = "center";
