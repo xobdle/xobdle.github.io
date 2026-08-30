@@ -542,27 +542,28 @@ function showResult() {
   document.getElementById("resultDate").textContent = formattedDate();
 
   const wonGame = didWin();
-  document.getElementById("lossResultMessage").classList.toggle("show", !wonGame);
+
+  document
+    .getElementById("lossResultMessage")
+    .classList.toggle("show", !wonGame);
 
   const resultTime = document.getElementById("resultTime");
-  const resultSocial = document.querySelector(".result-social");
 
   if (wonGame) {
-  resultTime.innerHTML =
-    '<div class="done-line">Done in ' +
-    formatElapsedWords(elapsedSeconds) +
-    ' today! 🥳</div>' +
-    '<div class="served-line">A new Xobdle is served every day at 6:00 AM IST 🍳</div>';
+    resultTime.innerHTML =
+      '<div class="done-line">Done in ' +
+      formatElapsedWords(elapsedSeconds) +
+      ' today! 🥳</div>' +
+      '<div class="served-line">A new Xobdle is served every day at 6:00 AM 🍳</div>';
 
-  resultTime.style.display = "";
-  resultSocial.style.display = "";
-} else {
-  resultTime.textContent = "";
-  resultTime.style.display = "none";
-  resultSocial.style.display = "none";
-}
+    resultTime.style.display = "";
+  } else {
+    resultTime.textContent = "";
+    resultTime.style.display = "none";
+  }
 
   renderResultGrid();
+
   document.getElementById("shareNote").textContent = "";
   refitSoon();
 }
