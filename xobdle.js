@@ -5,6 +5,7 @@ const API_URL = "https://xobdle-api.supportxobdle.workers.dev";
 let puzzleDate = null;
 let keys = [];
 let yesterdayAnswer = "";
+let hint = "";
 let keyboardRows = [];
 let apiState = "loading";
 
@@ -121,6 +122,7 @@ async function fetchPuzzleState() {
       puzzleDate = data.date || getISTISODate(0);
       keys = Array.isArray(data.keys) ? data.keys : [];
       yesterdayAnswer = data.yesterdayAnswer || "";
+      hint = data.hint || "";
 
       keyboardRows = [
         keys.slice(0, 8),
@@ -133,6 +135,7 @@ async function fetchPuzzleState() {
       puzzleDate = null;
       keys = [];
       yesterdayAnswer = "";
+      hint = "";
       keyboardRows = [];
     }
 
@@ -293,8 +296,17 @@ instructionsOverlay.addEventListener("click", event => {
 });
 
 const startTodayBtn = document.getElementById("startTodayBtn");
+const entryHintBtn = document.getElementById("entryHintBtn");
+const entryHintText = document.getElementById("entryHintText");
 const entryYesterdayBtn = document.getElementById("entryYesterdayBtn");
 const entryHelpBtn = document.getElementById("entryHelpBtn");
+
+entryHintBtn.addEventListener("click", () => {
+  entryHintText.textContent = hint || "No hint available today.";
+  entryHintText.classList.remove("hidden");
+  entryHintBtn.classList.add("hidden");
+  refitSoon();
+});
 
 startTodayBtn.addEventListener("click", () => {
   markStartedToday();
