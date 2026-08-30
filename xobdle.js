@@ -639,30 +639,17 @@ async function createResultPNG() {
     }
   }
 
-  // Only winners get completion-time and Instagram text on the PNG.
-  if (didWin()) {
-    ctx.textAlign = "center";
-    ctx.fillStyle = COLORS.text;
-    ctx.font = '600 34px "Poppins", sans-serif';
-    ctx.fillText("Done in " + formatElapsedWords(elapsedSeconds) + " today!", W / 2, 1100);
-
-    const socialLead = "Tag us on Instagram · ";
-    const socialHandle = "@xobdle";
-
-    ctx.font = '500 27px "Poppins", sans-serif';
-    const leadWidth = ctx.measureText(socialLead).width;
-    ctx.font = '600 27px "Poppins", sans-serif';
-    const handleWidth = ctx.measureText(socialHandle).width;
-    const socialX = (W - leadWidth - handleWidth) / 2;
-
-    ctx.textAlign = "left";
-    ctx.fillStyle = COLORS.muted;
-    ctx.font = '500 27px "Poppins", sans-serif';
-    ctx.fillText(socialLead, socialX, 1160);
-    ctx.fillStyle = COLORS.orange;
-    ctx.font = '600 27px "Poppins", sans-serif';
-    ctx.fillText(socialHandle, socialX + leadWidth, 1160);
-  }
+  // Only winners get completion time on the PNG.
+if (didWin()) {
+  ctx.textAlign = "center";
+  ctx.fillStyle = COLORS.text;
+  ctx.font = '600 34px "Poppins", sans-serif';
+  ctx.fillText(
+    "Done in " + formatElapsedWords(elapsedSeconds) + " today!",
+    W / 2,
+    1100
+  );
+}
 
   return new Promise(resolve => resultCanvas.toBlob(resolve, "image/png", 1));
 }
