@@ -535,6 +535,22 @@ function didWin() {
   );
 }
 
+function getXobdleRank() {
+  if (!didWin()) return "";
+
+  const winningRow = evaluations.findIndex(
+    row => Array.isArray(row) && row.every(status => status === "correct")
+  );
+
+  return [
+    "👑 Xobdle Legend",
+    "🔥 Xobdle Pro",
+    "😎 Xobdle Champ",
+    "✨ Xobdle Star",
+    "😅 Close Call!"
+  ][winningRow] || "";
+}
+
 function showResult() {
   document.getElementById("statusPage").classList.add("hidden");
   document.getElementById("gamePage").classList.add("hidden");
@@ -551,6 +567,9 @@ function showResult() {
 
   if (wonGame) {
     resultTime.innerHTML =
+      '<div class="done-line">' +
+      getXobdleRank() +
+      '</div>' +
       '<div class="done-line">Done in ' +
       formatElapsedWords(elapsedSeconds) +
       ' today! 🥳</div>' +
@@ -643,11 +662,18 @@ async function createResultPNG() {
   if (didWin()) {
     ctx.textAlign = "center";
     ctx.fillStyle = COLORS.text;
+    ctx.font = '700 38px "Poppins", sans-serif';
+    ctx.fillText(
+      getXobdleRank(),
+      W / 2,
+      1050
+    );
+
     ctx.font = '600 34px "Poppins", sans-serif';
     ctx.fillText(
       "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳",
       W / 2,
-      1090
+      1110
     );
 
     ctx.fillStyle = COLORS.muted;
@@ -655,7 +681,7 @@ async function createResultPNG() {
     ctx.fillText(
       "A new Xobdle is served every day at 6:00 AM IST 🍳",
       W / 2,
-      1150
+      1170
     );
   } else {
     ctx.textAlign = "center";
@@ -759,7 +785,9 @@ function refitSoon() {
   requestAnimationFrame(() => requestAnimationFrame(fitActivePage));
 }
 
-document.getElementById("shareBtn").addEventListener("click", sharePNG);
+const shareBtn = document.getElementById("shareBtn");
+shareBtn.textContent = "Share & Challenge";
+shareBtn.addEventListener("click", sharePNG);
 document.getElementById("saveBtn").addEventListener("click", savePNG);
 
 buildBoard();
