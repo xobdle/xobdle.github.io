@@ -145,7 +145,7 @@ function showStatusPage() {
 
   message.textContent = "Today’s Xobdle is being cooked. 🍳";
   sub.innerHTML =
-    'Come back soon.<br><a href="mailto:xobdlesupport@gmail.com">xobdlesupport@gmail.com</a>';
+    'Come back soon.<br><a href="mailto:supportxobdle@gmail.com">supportxobdle@gmail.com</a>';
 
   refitSoon();
 }
