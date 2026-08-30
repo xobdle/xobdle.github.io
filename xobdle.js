@@ -19,6 +19,7 @@ let gameStartedAt = null;
 let gameFinishedAt = null;
 let elapsedSeconds = 0;
 let timerInterval = null;
+let isSubmitting = false;
 
 function getISTNowParts() {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -370,12 +371,14 @@ function backspace() {
 
 async function submitGuess() {
   if (gameOver || getSiteState() !== "live") return;
+  if (isSubmitting) return;
   if (currentGuess.length !== WORD_LENGTH) {
     message.textContent = "";
     return;
   }
 
   const guess = [...currentGuess];
+  isSubmitting = true;
 
   try {
     const data = await checkGuessWithAPI(guess);
@@ -424,6 +427,8 @@ async function submitGuess() {
   } catch (error) {
     console.warn("Could not check guess:", error);
     message.textContent = "";
+  } finally {
+    isSubmitting = false;
   }
 }
 
