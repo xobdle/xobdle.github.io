@@ -640,17 +640,41 @@ async function createResultPNG() {
     }
   }
 
-  // Only winners get completion time on the PNG.
-if (didWin()) {
-  ctx.textAlign = "center";
-  ctx.fillStyle = COLORS.text;
-  ctx.font = '600 34px "Poppins", sans-serif';
-  ctx.fillText(
-    "Done in " + formatElapsedWords(elapsedSeconds) + " today!",
-    W / 2,
-    1100
-  );
-}
+  if (didWin()) {
+    ctx.textAlign = "center";
+    ctx.fillStyle = COLORS.text;
+    ctx.font = '600 34px "Poppins", sans-serif';
+    ctx.fillText(
+      "Done in " + formatElapsedWords(elapsedSeconds) + " today! 🥳",
+      W / 2,
+      1090
+    );
+
+    ctx.fillStyle = COLORS.muted;
+    ctx.font = '500 27px "Poppins", sans-serif';
+    ctx.fillText(
+      "A new Xobdle is served every day at 6:00 AM IST 🍳",
+      W / 2,
+      1150
+    );
+  } else {
+    ctx.textAlign = "center";
+    ctx.fillStyle = COLORS.text;
+    ctx.font = '600 34px "Poppins", sans-serif';
+    ctx.fillText(
+      "Oops! No luck today 😭",
+      W / 2,
+      1090
+    );
+
+    ctx.fillStyle = COLORS.muted;
+    ctx.font = '500 27px "Poppins", sans-serif';
+    ctx.fillText(
+      "A new Xobdle is served every day at 6:00 AM IST 🍳",
+      W / 2,
+      1150
+    );
+  }
 
   return new Promise(resolve => resultCanvas.toBlob(resolve, "image/png", 1));
 }
