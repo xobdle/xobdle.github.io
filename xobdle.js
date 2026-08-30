@@ -597,13 +597,13 @@ async function createResultPNG() {
   ctx.font = '700 92px "Poppins", sans-serif';
 
   const mainLogoWidth = ctx.measureText("Xobdle").width;
-  const suffixWidth = ctx.measureText(".in").width;
+  const suffixWidth = ctx.measureText(".org").width;
   const logoX = (W - mainLogoWidth - suffixWidth) / 2;
 
   ctx.fillStyle = COLORS.text;
   ctx.fillText("Xobdle", logoX, 205);
   ctx.fillStyle = COLORS.orange;
-  ctx.fillText(".in", logoX + mainLogoWidth, 205);
+  ctx.fillText(".org", logoX + mainLogoWidth, 205);
 
   ctx.textAlign = "center";
   ctx.fillStyle = COLORS.muted;
