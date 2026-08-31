@@ -781,17 +781,94 @@ async function createResultPNG() {
   return new Promise(resolve => resultCanvas.toBlob(resolve, "image/png", 1));
 }
 
+function isCapacitorNative() {
+  return Boolean(
+    window.Capacitor &&
+    typeof window.Capacitor.isNativePlatform === "function" &&
+    window.Capacitor.isNativePlatform()
+  );
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const result = String(reader.result || "");
+      resolve(result.includes(",") ? result.split(",")[1] : result);
+    };
+
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function writeNativePNG(blob, directory) {
+  const Filesystem = window.Capacitor?.Plugins?.Filesystem;
+
+  if (!Filesystem) {
+    throw new Error("Filesystem plugin is unavailable.");
+  }
+
+  const base64Data = await blobToBase64(blob);
+  const fileName = `xobdle-result-${puzzleDate || getISTISODate(0)}.png`;
+
+  const result = await Filesystem.writeFile({
+    path: fileName,
+    data: base64Data,
+    directory
+  });
+
+  return {
+    fileName,
+    uri: result.uri
+  };
+}
+
 async function sharePNG() {
   const note = document.getElementById("shareNote");
   note.textContent = "";
+
   const blob = await createResultPNG();
+
   if (!blob) {
     note.textContent = "Could not create PNG.";
     return;
   }
 
+  if (isCapacitorNative()) {
+    try {
+      const Share = window.Capacitor?.Plugins?.Share;
+
+      if (!Share) {
+        throw new Error("Share plugin is unavailable.");
+      }
+
+      // Capacitor Share can share files from the app cache on Android.
+      const saved = await writeNativePNG(blob, "CACHE");
+
+      await Share.share({
+        title: "Xobdle",
+        text: "My Xobdle result — can you beat me? https://xobdle.org/",
+        files: [saved.uri],
+        dialogTitle: "Share & Challenge"
+      });
+
+      return;
+    } catch (error) {
+      console.warn("Native share failed:", error);
+      note.textContent = "Could not open the share sheet.";
+      return;
+    }
+  }
+
   const file = new File([blob], "xobdle-result.png", { type: "image/png" });
-  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+
+  if (
+    navigator.share &&
+    navigator.canShare &&
+    navigator.canShare({ files: [file] })
+  ) {
     try {
       await navigator.share({ files: [file] });
       return;
@@ -801,17 +878,33 @@ async function sharePNG() {
   }
 
   downloadPNG(blob);
-  note.textContent = "Direct image sharing is unavailable here, so the PNG was saved.";
+  note.textContent =
+    "Direct image sharing is unavailable here, so the PNG was saved.";
 }
 
 async function savePNG() {
   const note = document.getElementById("shareNote");
   note.textContent = "";
+
   const blob = await createResultPNG();
+
   if (!blob) {
     note.textContent = "Could not create PNG.";
     return;
   }
+
+  if (isCapacitorNative()) {
+    try {
+      const saved = await writeNativePNG(blob, "DOCUMENTS");
+      note.textContent = "PNG saved to Documents as " + saved.fileName + ".";
+      return;
+    } catch (error) {
+      console.warn("Native save failed:", error);
+      note.textContent = "Could not save PNG.";
+      return;
+    }
+  }
+
   downloadPNG(blob);
   note.textContent = "PNG saved.";
 }
