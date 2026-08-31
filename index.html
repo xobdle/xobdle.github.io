@@ -2,25 +2,76 @@
 <html lang="as">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+  >
+
+  <!-- =========================================================
+       PRIMARY SEO
+  ========================================================== -->
 
   <title>Xobdle.org | Daily Assamese Word Game</title>
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <meta
+    name="description"
+    content="Play Xobdle, a free daily Assamese word-guessing game inspired by Wordle. Guess a new five-akshara Assamese word every day in five attempts."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
+  <meta
+    name="googlebot"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
   <meta name="application-name" content="Xobdle">
   <meta name="theme-color" content="#ffffff">
 
   <link rel="canonical" href="https://xobdle.org/">
 
-  <meta property="og:title" content="Xobdle.org | Daily Assamese Word Game">
+  <!-- =========================================================
+       OPEN GRAPH
+  ========================================================== -->
+
+  <meta
+    property="og:title"
+    content="Xobdle.org | Daily Assamese Word Game"
+  >
+
+  <meta
+    property="og:description"
+    content="A free daily Assamese word-guessing game. Guess today's five-akshara Assamese word in five attempts."
+  >
+
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://xobdle.org/">
   <meta property="og:site_name" content="Xobdle">
   <meta property="og:locale" content="as_IN">
 
+  <!-- =========================================================
+       TWITTER / X
+  ========================================================== -->
+
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Xobdle.org | Daily Assamese Word Game">
-  
+
+  <meta
+    name="twitter:title"
+    content="Xobdle.org | Daily Assamese Word Game"
+  >
+
+  <meta
+    name="twitter:description"
+    content="A free daily Assamese word-guessing game. A new Assamese word every day."
+  >
+
+  <!-- =========================================================
+       STRUCTURED DATA
+  ========================================================== -->
 
   <script type="application/ld+json">
   {
@@ -31,9 +82,15 @@
         "@id": "https://xobdle.org/#website",
         "url": "https://xobdle.org/",
         "name": "Xobdle",
-        "alternateName": "Xobdle.org",
-        "description": "A free daily Assamese word game.",
-        "inLanguage": "as"
+        "alternateName": [
+          "Xobdle.org",
+          "Xobdle Assamese Word Game"
+        ],
+        "description": "Xobdle is a free daily Assamese word-guessing game inspired by Wordle.",
+        "inLanguage": [
+          "as",
+          "en"
+        ]
       },
       {
         "@type": "WebApplication",
@@ -44,18 +101,40 @@
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript",
         "isAccessibleForFree": true,
-        "description": "Guess the daily five-akshara Assamese word in five tries.",
-        "inLanguage": "as"
+        "description": "A daily Assamese word game where players guess a five-akshara Assamese word in five attempts.",
+        "inLanguage": [
+          "as",
+          "en"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
+        }
       }
     ]
   }
   </script>
 
+  <!-- =========================================================
+       FONTS
+  ========================================================== -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -95,19 +174,19 @@
       overflow: hidden;
       padding: 4px 0;
     }
-   .done-line {
-  font-size: 15px;
-  font-weight: 600;
-}
 
-.served-line {
-  margin-top: 5px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #8b877f;
-  white-space: nowrap;
-}
+    .done-line {
+      font-size: 15px;
+      font-weight: 600;
+    }
 
+    .served-line {
+      margin-top: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #8b877f;
+      white-space: nowrap;
+    }
 
     .page {
       position: relative;
@@ -211,7 +290,8 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 7px;
     }
-.tile {
+
+    .tile {
       aspect-ratio: 1;
       border: 1.8px solid #d8d4cd;
       border-radius: 11px;
@@ -311,6 +391,9 @@
       color: #777;
     }
 
+    /* =========================================================
+       HELP
+    ========================================================== */
 
     .help-button {
       position: absolute;
@@ -421,9 +504,21 @@
       border-radius: 5px;
     }
 
-    .legend-box.correct { background: #4f8c65; }
-    .legend-box.present { background: #c39a3b; }
-    .legend-box.absent  { background: #aaa49c; }
+    .legend-box.correct {
+      background: #4f8c65;
+    }
+
+    .legend-box.present {
+      background: #c39a3b;
+    }
+
+    .legend-box.absent {
+      background: #aaa49c;
+    }
+
+    /* =========================================================
+       RESULT
+    ========================================================== */
 
     .result-page {
       text-align: center;
@@ -517,8 +612,6 @@
       font-weight: 700;
     }
 
-  
-
     .result-time {
       margin-top: 25px;
       font-family: "Poppins", sans-serif;
@@ -528,7 +621,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-.result-actions {
+    .result-actions {
       width: 100%;
       max-width: 390px;
       margin: 14px auto 0;
@@ -616,7 +709,7 @@
     canvas {
       display: none;
     }
-  
+
     .timer-emoji {
       display: inline-block;
       font-size: 1.65em;
@@ -629,12 +722,10 @@
       vertical-align: middle;
     }
 
-  
     #gameTimer {
       margin-top: 10px;
     }
 
-  
     .xobdle-logo a {
       color: inherit;
       text-decoration: none;
@@ -651,12 +742,14 @@
       text-decoration: none;
     }
 
-  
     .key.action.backspace-key {
       font-size: 11px;
     }
 
-  
+    /* =========================================================
+       YESTERDAY
+    ========================================================== */
+
     .answer-button {
       position: absolute;
       top: 19px;
@@ -743,7 +836,10 @@
       color: #202020;
     }
 
-  
+    /* =========================================================
+       STATUS / COOKING PAGE
+    ========================================================== */
+
     .status-page {
       text-align: center;
       padding-top: 22px;
@@ -1014,10 +1110,21 @@
       animation: xobdleLetterDance 2.8s ease-in-out infinite;
     }
 
-    .cooking-letter:nth-child(1) { animation-delay: 0s; }
-    .cooking-letter:nth-child(2) { animation-delay: -0.7s; }
-    .cooking-letter:nth-child(3) { animation-delay: -1.4s; }
-    .cooking-letter:nth-child(4) { animation-delay: -2.1s; }
+    .cooking-letter:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .cooking-letter:nth-child(2) {
+      animation-delay: -0.7s;
+    }
+
+    .cooking-letter:nth-child(3) {
+      animation-delay: -1.4s;
+    }
+
+    .cooking-letter:nth-child(4) {
+      animation-delay: -2.1s;
+    }
 
     @keyframes xobdleLetterDance {
       0%,
@@ -1116,11 +1223,6 @@
       color: #8b877f;
     }
 
-    /*
-      The existing JS still writes to these two elements.
-      They remain in the HTML for compatibility, but the new
-      cooking screen uses its own static message and feedback.
-    */
     .status-message,
     .status-submessage {
       display: none;
@@ -1148,8 +1250,6 @@
       }
     }
 
-
-    /* Keep the cooking illustration truly centered on the page */
     #statusPage .cooking-scene {
       width: 100%;
       max-width: none;
@@ -1172,8 +1272,6 @@
       }
     }
 
-
-    /* FINAL cooking-page layout: center the actual kadai at 50% of viewport height */
     #statusPage.status-page {
       position: relative;
       width: min(460px, 100vw);
@@ -1210,7 +1308,6 @@
       background: transparent;
     }
 
-    /* Make the scene span the whole status page */
     #statusPage .cooking-scene {
       position: absolute;
       inset: 0;
@@ -1221,7 +1318,6 @@
       pointer-events: none;
     }
 
-    /* Centre the complete kadai assembly exactly at 50% viewport height */
     #statusPage .cooking-kadai-wrap {
       position: absolute;
       left: 50%;
@@ -1231,7 +1327,6 @@
       transform-origin: center center;
     }
 
-    /* Steam sits immediately above the centred kadai */
     #statusPage .cooking-steam {
       left: 50%;
       top: calc(50% - 128px);
@@ -1251,7 +1346,7 @@
     #statusPage .cooking-feedback {
       position: absolute;
       left: 50%;
-      bottom: max(16px, env(safe-area-inset-bottom));
+      bottom: max(34px, calc(env(safe-area-inset-bottom) + 34px));
       transform: translateX(-50%);
       width: min(360px, calc(100% - 28px));
       max-width: none;
@@ -1303,13 +1398,13 @@
       }
 
       #statusPage .cooking-feedback {
-        bottom: max(8px, env(safe-area-inset-bottom));
+        bottom: max(34px, calc(env(safe-area-inset-bottom) + 34px));
         padding-top: 8px;
       }
     }
 
+    /* Xobdle Kitchen Story */
 
-    /* Xobdle Kitchen Story — production cooking-page layout */
     #statusPage .cooking-kadai-wrap {
       top: 40% !important;
       bottom: auto !important;
@@ -1417,8 +1512,10 @@
       }
     }
 
+    /* =========================================================
+       DAILY START SCREEN
+    ========================================================== */
 
-    /* DAILY START SCREEN */
     .entry-page {
       position: relative;
       width: min(460px, 100vw);
@@ -1480,15 +1577,27 @@
       left: -75%;
       width: 45%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.24), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.24),
+        transparent
+      );
       transform: skewX(-18deg);
       animation: entryStartSweep 5.5s ease-in-out infinite;
       pointer-events: none;
     }
 
     @keyframes entryStartSweep {
-      0%, 72% { left: -75%; }
-      88%, 100% { left: 135%; }
+      0%,
+      72% {
+        left: -75%;
+      }
+
+      88%,
+      100% {
+        left: 135%;
+      }
     }
 
     .entry-bottom {
@@ -1553,16 +1662,45 @@
     }
 
     @media (max-height: 620px) {
-      .entry-page .brand { top: 14px; }
-      .entry-main { top: 41%; }
-      .entry-ready { margin-bottom: 12px; font-size: 15px; }
-      .entry-start { height: 42px; }
-      .entry-play-note { margin-bottom: 8px; font-size: 10px; line-height: 1.4; }
-      .entry-secondary button { min-height: 38px; font-size: 11px; }
-      .entry-served-note { margin-top: 8px; font-size: 10px; }
-      .entry-feedback { margin-top: 7px; padding-top: 7px; font-size: 10px; }
-    }
+      .entry-page .brand {
+        top: 14px;
+      }
 
+      .entry-main {
+        top: 41%;
+      }
+
+      .entry-ready {
+        margin-bottom: 12px;
+        font-size: 15px;
+      }
+
+      .entry-start {
+        height: 42px;
+      }
+
+      .entry-play-note {
+        margin-bottom: 8px;
+        font-size: 10px;
+        line-height: 1.4;
+      }
+
+      .entry-secondary button {
+        min-height: 38px;
+        font-size: 11px;
+      }
+
+      .entry-served-note {
+        margin-top: 8px;
+        font-size: 10px;
+      }
+
+      .entry-feedback {
+        margin-top: 7px;
+        padding-top: 7px;
+        font-size: 10px;
+      }
+    }
 
     .entry-hint-wrap {
       margin-top: 10px;
@@ -1592,23 +1730,208 @@
       color: #55514c;
     }
 
+    /* =========================================================
+       INFORMATION FOOTER
+    ========================================================== */
+
+    .xobdle-info-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 7px 11px;
+      margin-top: 9px;
+      font-family: "Poppins", sans-serif;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #9b958d;
+    }
+
+    .xobdle-info-footer button {
+      border: 0;
+      background: transparent;
+      padding: 2px 0;
+      color: #8b877f;
+      font-family: "Poppins", sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .xobdle-info-footer button:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-dot {
+      color: #d0cbc4;
+      user-select: none;
+    }
+
+    /* Cooking-page footer kept OUTSIDE .cooking-feedback */
+    #statusPage .status-info-footer {
+      position: absolute;
+      left: 50%;
+      bottom: max(3px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(360px, calc(100% - 28px));
+      margin: 0;
+      z-index: 40;
+    }
+
+    /* =========================================================
+       ABOUT / CONTACT / PRIVACY MODAL
+    ========================================================== */
+
+    .info-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(255,255,255,.94);
+    }
+
+    .info-overlay.hidden {
+      display: none;
+    }
+
+    .info-card {
+      position: relative;
+      width: min(390px, 92vw);
+      max-height: calc(100dvh - 36px);
+      overflow-y: auto;
+      background: #ffffff;
+      border: 1px solid #e6e1da;
+      border-radius: 18px;
+      padding: 28px 23px 24px;
+      text-align: left;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .info-close {
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #f2efea;
+      color: #55514c;
+      font-family: "Poppins", sans-serif;
+      font-size: 20px;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .info-card h2 {
+      margin: 0 42px 17px 0;
+      font-family: "Poppins", sans-serif;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: #202020;
+    }
+
+    .info-card h3 {
+      margin: 19px 0 6px;
+      font-family: "Poppins", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #202020;
+    }
+
+    .info-card p {
+      margin: 0 0 12px;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      line-height: 1.65;
+      font-weight: 400;
+      color: #55514c;
+    }
+
+    .info-card a,
+    .info-card a:visited {
+      color: #d96f32;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .info-small {
+      margin-top: 17px !important;
+      padding-top: 12px;
+      border-top: 1px solid #efebe5;
+      font-size: 10px !important;
+      color: #99938c !important;
+    }
+
+    @media (max-height: 620px) {
+      .xobdle-info-footer {
+        margin-top: 4px;
+        gap: 4px 8px;
+        font-size: 9px;
+      }
+
+      .xobdle-info-footer button {
+        font-size: 9px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .entry-start::after { animation: none; }
+      .entry-start::after {
+        animation: none;
+      }
     }
 
   </style>
-  <script data-goatcounter="https://xobdle.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
+  <!-- Google AdSense -->
+<script async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5411085624294300"
+  crossorigin="anonymous">
+</script>
+
+  <!-- =========================================================
+       GOATCOUNTER
+  ========================================================== -->
+
+  <script
+    data-goatcounter="https://xobdle.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js"
+  ></script>
+
 </head>
 
 <body>
+
   <noscript>
-    <section style="max-width:720px;margin:40px auto;padding:0 20px;font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#202020;">
-      <h1>Xobdle.org — Daily Assamese Word Game</h1>
+    <section
+      style="
+        max-width:720px;
+        margin:40px auto;
+        padding:0 20px;
+        font-family:Arial,Helvetica,sans-serif;
+        line-height:1.6;
+        color:#202020;
+      "
+    >
+      <h1>
+        Xobdle.org — Daily Assamese Word Game
+      </h1>
+
       <p>
-        Xobdle is a free daily Assamese word game. Guess the five-akshara Assamese word
-        in five tries. A new Xobdle is served every day at 6:00 AM IST.
+        Xobdle is a free daily Assamese word-guessing game
+        inspired by Wordle. Guess the five-akshara Assamese
+        word in five attempts. A new Xobdle is served every
+        day at 6:00 AM IST.
       </p>
+
       <p>
         JavaScript is required to play Xobdle.
       </p>
@@ -1617,32 +1940,79 @@
 
   <div class="viewport-stage">
 
+    <!-- =======================================================
+         DAILY START PAGE
+    ======================================================== -->
 
-    <!-- DAILY START PAGE -->
-    <main id="entryPage" class="page entry-page hidden">
+    <main
+      id="entryPage"
+      class="page entry-page hidden"
+    >
+
       <header class="brand">
-        <h1 class="xobdle-logo">Xobdle<span>.org</span></h1>
+        <h1 class="xobdle-logo">
+          Xobdle<span>.org</span>
+        </h1>
       </header>
 
       <section class="entry-main">
-        <p class="entry-ready">Ready for today’s Xobdle?</p>
-        <button id="startTodayBtn" class="entry-start" type="button">START</button>
+
+        <p class="entry-ready">
+          Ready for today’s Xobdle?
+        </p>
+
+        <button
+          id="startTodayBtn"
+          class="entry-start"
+          type="button"
+        >
+          START
+        </button>
 
         <div class="entry-hint-wrap">
-          <button id="entryHintBtn" class="entry-hint-button" type="button">Get a hint</button>
-          <div id="entryHintText" class="entry-hint-text hidden" aria-live="polite"></div>
+
+          <button
+            id="entryHintBtn"
+            class="entry-hint-button"
+            type="button"
+          >
+            Get a hint
+          </button>
+
+          <div
+            id="entryHintText"
+            class="entry-hint-text hidden"
+            aria-live="polite"
+          ></div>
+
         </div>
+
       </section>
 
       <section class="entry-bottom">
+
         <div class="entry-play-note">
-          Xobdle can be played only once a day. But I’m not gonna lie, if you don’t get it,
-          you can try again on another browser, device, or in incognito mode! 😄
+          Xobdle can be played only once a day. But I’m not gonna lie,
+          if you don’t get it, you can try again on another browser,
+          device, or in incognito mode! 😄
         </div>
 
         <div class="entry-secondary">
-          <button id="entryYesterdayBtn" type="button">Yesterday’s Xobdle</button>
-          <button id="entryHelpBtn" type="button">How to Play</button>
+
+          <button
+            id="entryYesterdayBtn"
+            type="button"
+          >
+            Yesterday’s Xobdle
+          </button>
+
+          <button
+            id="entryHelpBtn"
+            type="button"
+          >
+            How to Play
+          </button>
+
         </div>
 
         <div class="entry-served-note">
@@ -1651,50 +2021,170 @@
 
         <div class="entry-feedback">
           Feedback:
-          <a href="mailto:supportxobdle@gmail.com">supportxobdle@gmail.com</a>
+          <a href="mailto:supportxobdle@gmail.com">
+            supportxobdle@gmail.com
+          </a>
         </div>
+
+        <!-- ONLY ON START PAGE -->
+        <footer
+          class="xobdle-info-footer"
+          aria-label="Xobdle information"
+        >
+
+          <button
+            type="button"
+            data-info-page="about"
+          >
+            About
+          </button>
+
+          <span class="footer-dot">•</span>
+
+          <button
+            type="button"
+            data-info-page="contact"
+          >
+            Contact
+          </button>
+
+          <span class="footer-dot">•</span>
+
+          <button
+            type="button"
+            data-info-page="privacy"
+          >
+            Privacy
+          </button>
+
+        </footer>
+
       </section>
+
     </main>
 
-    <!-- GAME PAGE -->
-    <main id="gamePage" class="page">
-      <button id="yesterdayBtn" class="answer-button" type="button" aria-label="Yesterday’s answer">🕘</button>
-      <button id="helpBtn" class="help-button" type="button" aria-label="How to play">?</button>
+    <!-- =======================================================
+         GAME PAGE
+    ======================================================== -->
+
+    <main
+      id="gamePage"
+      class="page"
+    >
+
+      <button
+        id="yesterdayBtn"
+        class="answer-button"
+        type="button"
+        aria-label="Yesterday’s answer"
+      >
+        🕘
+      </button>
+
+      <button
+        id="helpBtn"
+        class="help-button"
+        type="button"
+        aria-label="How to play"
+      >
+        ?
+      </button>
 
       <header class="brand">
-        <h1 class="xobdle-logo"><a href="" aria-label="Reload Xobdle">Xobdle<span>.org</span></a></h1>
+
+        <h1 class="xobdle-logo">
+
+          <a
+            href=""
+            aria-label="Reload Xobdle"
+          >
+            Xobdle<span>.org</span>
+          </a>
+
+        </h1>
+
       </header>
 
-      <div id="gameDate" class="game-date"></div>
-      <div id="gameTimer" class="game-timer"><span class="timer-emoji">⏳</span><span class="timer-value">00:00</span></div>
-      
+      <div
+        id="gameDate"
+        class="game-date"
+      ></div>
 
-      <div id="message" class="message" aria-live="polite"></div>
+      <div
+        id="gameTimer"
+        class="game-timer"
+      >
 
-      <section id="board" class="board" aria-label="Xobdle board"></section>
+        <span class="timer-emoji">
+          ⏳
+        </span>
 
-      <section id="keyboard" class="keyboard" aria-label="Xobdle keyboard"></section>
+        <span class="timer-value">
+          00:00
+        </span>
+
+      </div>
+
+      <div
+        id="message"
+        class="message"
+        aria-live="polite"
+      ></div>
+
+      <section
+        id="board"
+        class="board"
+        aria-label="Xobdle board"
+      ></section>
+
+      <section
+        id="keyboard"
+        class="keyboard"
+        aria-label="Xobdle keyboard"
+      ></section>
+
     </main>
 
+    <!-- =======================================================
+         CLOSED / COOKING PAGE
+    ======================================================== -->
 
-    <!-- CLOSED / COOKING PAGE -->
-    <main id="statusPage" class="page status-page hidden">
+    <main
+      id="statusPage"
+      class="page status-page hidden"
+    >
 
       <button
         class="status-help-button"
         type="button"
         aria-label="How to play"
         onclick="document.getElementById('instructionsOverlay').classList.remove('hidden')"
-      >?</button>
+      >
+        ?
+      </button>
 
       <header class="brand">
-        <h1 class="xobdle-logo">Xobdle<span>.org</span></h1>
-        <div id="istClock" class="ist-clock" aria-label="Current time in India">00:00:00 IST</div>
+
+        <h1 class="xobdle-logo">
+          Xobdle<span>.org</span>
+        </h1>
+
+        <div
+          id="istClock"
+          class="ist-clock"
+          aria-label="Current time in India"
+        >
+          00:00:00 IST
+        </div>
+
       </header>
 
       <section class="status-card">
 
-        <div class="cooking-scene" aria-hidden="true">
+        <div
+          class="cooking-scene"
+          aria-hidden="true"
+        >
 
           <div class="cooking-steam">
             <div class="cooking-steam-wave"></div>
@@ -1717,10 +2207,23 @@
             <div class="cooking-bubble three"></div>
 
             <div class="cooking-letters">
-              <span class="cooking-letter">অ</span>
-              <span class="cooking-letter">আ</span>
-              <span class="cooking-letter">ক</span>
-              <span class="cooking-letter">খ</span>
+
+              <span class="cooking-letter">
+                অ
+              </span>
+
+              <span class="cooking-letter">
+                আ
+              </span>
+
+              <span class="cooking-letter">
+                ক
+              </span>
+
+              <span class="cooking-letter">
+                খ
+              </span>
+
             </div>
 
             <div class="cooking-kadai">
@@ -1728,144 +2231,734 @@
             </div>
 
           </div>
+
         </div>
 
         <div class="cooking-message">
-  A new Xobdle is served every day at 6:00 AM IST 🍳
+          A new Xobdle is served every day at 6:00 AM IST 🍳
         </div>
-
-        
 
         <div class="cooking-feedback">
+
           Feedback:
-          <a href="mailto:supportxobdle@gmail.com">supportxobdle@gmail.com</a>
+
+          <a href="mailto:supportxobdle@gmail.com">
+            supportxobdle@gmail.com
+          </a>
+
         </div>
 
-        <!-- Kept for compatibility with the existing xobdle.js -->
-        <div id="statusMessage" class="status-message" aria-live="polite"></div>
-        <div id="statusSubmessage" class="status-submessage"></div>
+        <!-- ONLY ON COOKING PAGE.
+             Kept outside cooking-feedback so it survives
+             the short-screen feedback hiding rule. -->
+        <footer
+          class="xobdle-info-footer status-info-footer"
+          aria-label="Xobdle information"
+        >
+
+          <button
+            type="button"
+            data-info-page="about"
+          >
+            About
+          </button>
+
+          <span class="footer-dot">•</span>
+
+          <button
+            type="button"
+            data-info-page="contact"
+          >
+            Contact
+          </button>
+
+          <span class="footer-dot">•</span>
+
+          <button
+            type="button"
+            data-info-page="privacy"
+          >
+            Privacy
+          </button>
+
+        </footer>
+
+        <!-- Existing JS compatibility -->
+
+        <div
+          id="statusMessage"
+          class="status-message"
+          aria-live="polite"
+        ></div>
+
+        <div
+          id="statusSubmessage"
+          class="status-submessage"
+        ></div>
 
       </section>
+
     </main>
 
-    <!-- RESULT PAGE -->
-    <main id="resultPage" class="page result-page hidden">
+    <!-- =======================================================
+         RESULT PAGE
+    ======================================================== -->
+
+    <main
+      id="resultPage"
+      class="page result-page hidden"
+    >
+
       <section class="result-card">
-        <h1 class="result-title xobdle-logo">Xobdle<span>.org</span></h1>
 
-        <div id="resultDate" class="result-date"></div>
+        <h1 class="result-title xobdle-logo">
+          Xobdle<span>.org</span>
+        </h1>
 
-        <div id="resultGrid" class="result-grid"></div>
+        <div
+          id="resultDate"
+          class="result-date"
+        ></div>
 
-        <div id="lossResultMessage" class="loss-result-message">
-  <strong>Oops! No luck today 😭</strong><br>
-  A new Xobdle is served every day at 6:00 AM 🍳
-</div>
+        <div
+          id="resultGrid"
+          class="result-grid"
+        ></div>
 
-        <div id="resultTime" class="result-time">
-          <div class="done-line">Done in 00:00 today! 🥳</div>
-          <div class="served-line">A new Xobdle is served every day at 6:00 AM 🍳</div>
+        <div
+          id="lossResultMessage"
+          class="loss-result-message"
+        >
+
+          <strong>
+            Oops! No luck today 😭
+          </strong>
+
+          <br>
+
+          A new Xobdle is served every day at 6:00 AM 🍳
+
+        </div>
+
+        <div
+          id="resultTime"
+          class="result-time"
+        >
+
+          <div class="done-line">
+            Done in 00:00 today! 🥳
+          </div>
+
+          <div class="served-line">
+            A new Xobdle is served every day at 6:00 AM 🍳
+          </div>
+
         </div>
 
       </section>
 
       <div class="result-actions">
-        <button id="shareBtn" class="share-button" type="button">Share</button>
-        <button id="saveBtn" class="save-button" type="button">Save PNG</button>
+
+        <button
+          id="shareBtn"
+          class="share-button"
+          type="button"
+        >
+          Share
+        </button>
+
+        <button
+          id="saveBtn"
+          class="save-button"
+          type="button"
+        >
+          Save PNG
+        </button>
+
       </div>
 
-      <div id="shareNote" class="share-note" aria-live="polite"></div>
+      <div
+        id="shareNote"
+        class="share-note"
+        aria-live="polite"
+      ></div>
 
-      <section class="updates-box" aria-label="Xobdle email updates">
-        <p class="updates-title">📩 Get answers &amp; new-game updates</p>
-        <p class="updates-text">
-          Leave your email to get Xobdle answers and know when a new game is available.
-          Answers are also always available on Xobdle.org itself.
+      <section
+        class="updates-box"
+        aria-label="Xobdle email updates"
+      >
+
+        <p class="updates-title">
+          📩 Get answers &amp; new-game updates
         </p>
+
+        <p class="updates-text">
+          Leave your email to get Xobdle answers and know when a new game
+          is available. Answers are also always available on Xobdle.org itself.
+        </p>
+
         <a
           class="updates-button"
           href="https://forms.gle/kxedBJcrLZUyN2TFA"
           target="_blank"
           rel="noopener noreferrer"
-        >Join email updates</a>
+        >
+          Join email updates
+        </a>
+
       </section>
+
     </main>
 
+    <!-- =======================================================
+         YESTERDAY OVERLAY
+    ======================================================== -->
 
+    <div
+      id="yesterdayOverlay"
+      class="yesterday-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="yesterdayTitle"
+    >
 
-    <div id="yesterdayOverlay" class="yesterday-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="yesterdayTitle">
       <div class="yesterday-card">
-        <button id="yesterdayClose" class="yesterday-close" type="button" aria-label="Close">×</button>
-        <div id="yesterdayTitle" class="yesterday-title">Yesterday’s Xobdle</div>
-        <div id="yesterdayDate" class="yesterday-date"></div>
-        <div id="yesterdayAnswer" class="yesterday-answer">গামোচা</div>
+
+        <button
+          id="yesterdayClose"
+          class="yesterday-close"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <div
+          id="yesterdayTitle"
+          class="yesterday-title"
+        >
+          Yesterday’s Xobdle
+        </div>
+
+        <div
+          id="yesterdayDate"
+          class="yesterday-date"
+        ></div>
+
+        <div
+          id="yesterdayAnswer"
+          class="yesterday-answer"
+        >
+          গামোচা
+        </div>
+
       </div>
+
     </div>
 
-    <div id="instructionsOverlay" class="instructions-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="instructionsTitle">
-      <div class="instructions-card">
-        <button id="instructionsClose" class="instructions-close" type="button" aria-label="Close instructions">×</button>
+    <!-- =======================================================
+         HOW TO PLAY OVERLAY
+    ======================================================== -->
 
-        <h2 id="instructionsTitle">‘শব্দল’ কেনেকৈ খেলিব?</h2>
+    <div
+      id="instructionsOverlay"
+      class="instructions-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="instructionsTitle"
+    >
+
+      <div class="instructions-card">
+
+        <button
+          id="instructionsClose"
+          class="instructions-close"
+          type="button"
+          aria-label="Close instructions"
+        >
+          ×
+        </button>
+
+        <h2 id="instructionsTitle">
+          ‘শব্দল’ কেনেকৈ খেলিব?
+        </h2>
 
         <ol class="instructions-list">
-          <li>প্ৰতিদিনে ‘শব্দল’এ পাঁচটা আখৰৰ অসমীয়া শব্দ এটা নিৰ্ধাৰিত কৰি ৰাখিব আৰু খেলুৱৈসকলে জিকিবৰ বাবে সেই নিৰ্ধাৰিত শব্দটো বাছি উলিয়াব লাগিব।</li>
-          <li>তাৰ বাবে প্ৰথমে কী-বোৰ্ডত থকা আখৰসমূহৰ পৰা পাঁচটা আখৰৰ যিকোনো অৰ্থপূৰ্ণ শব্দ এটা বাছি উলিয়াই প্ৰথম শাৰীত ভৰাব।</li>
-          <li>যদি বাছনি কৰা শব্দটো সেইদিনাৰ বাবে নিৰ্ধাৰিত শব্দটোৱেই হয়, শাৰীটোৰ প্ৰতিটো ঘৰেই সেউজীয়া হৈ পৰিব আৰু আপুনি সেইদিনাৰ শব্দল শৃংখলটো জিকিব।</li>
-          <li>যদি নহয়, শাৰীৰ ঘৰবোৰত তলত দিয়া ধৰণৰ ৰং দেখিব। সেই অনুসৰি আন অৰ্থপূৰ্ণ শব্দ বাছি উলিয়াবলৈ চেষ্টা কৰিব আৰু বাকী থকা শাৰীসমূহত ভৰাই চাব। সৰ্বাধিক পাঁচবাৰ চেষ্টা কৰিব পাৰিব।</li>
+
+          <li>
+            প্ৰতিদিনে ‘শব্দল’এ পাঁচটা আখৰৰ অসমীয়া শব্দ এটা নিৰ্ধাৰিত কৰি
+            ৰাখিব আৰু খেলুৱৈসকলে জিকিবৰ বাবে সেই নিৰ্ধাৰিত শব্দটো বাছি
+            উলিয়াব লাগিব।
+          </li>
+
+          <li>
+            তাৰ বাবে প্ৰথমে কী-বোৰ্ডত থকা আখৰসমূহৰ পৰা পাঁচটা আখৰৰ যিকোনো
+            অৰ্থপূৰ্ণ শব্দ এটা বাছি উলিয়াই প্ৰথম শাৰীত ভৰাব।
+          </li>
+
+          <li>
+            যদি বাছনি কৰা শব্দটো সেইদিনাৰ বাবে নিৰ্ধাৰিত শব্দটোৱেই হয়,
+            শাৰীটোৰ প্ৰতিটো ঘৰেই সেউজীয়া হৈ পৰিব আৰু আপুনি সেইদিনাৰ
+            শব্দল শৃংখলটো জিকিব।
+          </li>
+
+          <li>
+            যদি নহয়, শাৰীৰ ঘৰবোৰত তলত দিয়া ধৰণৰ ৰং দেখিব। সেই অনুসৰি
+            আন অৰ্থপূৰ্ণ শব্দ বাছি উলিয়াবলৈ চেষ্টা কৰিব আৰু বাকী থকা
+            শাৰীসমূহত ভৰাই চাব। সৰ্বাধিক পাঁচবাৰ চেষ্টা কৰিব পাৰিব।
+          </li>
+
         </ol>
 
         <div class="legend">
+
           <div class="legend-row">
+
             <span class="legend-box correct"></span>
-            <span>এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত শব্দটোত আছে আৰু সঠিক ঠাইত বহুৱাইছে।</span>
-            
+
+            <span>
+              এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত
+              শব্দটোত আছে আৰু সঠিক ঠাইত বহুৱাইছে।
+            </span>
+
           </div>
 
           <div class="legend-row">
+
             <span class="legend-box present"></span>
-            <span>এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত শব্দটোত আছে কিন্তু বেলেগ ঠাইত বহুৱাইছে।</span>
+
+            <span>
+              এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত
+              শব্দটোত আছে কিন্তু বেলেগ ঠাইত বহুৱাইছে।
+            </span>
+
           </div>
 
           <div class="legend-row">
+
             <span class="legend-box absent"></span>
-            <span>এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত শব্দটোত নাই।</span>
+
+            <span>
+              এইটো ৰঙে বুজায় যে বাছনি কৰা আখৰটো সেইদিনাৰ বাবে নিৰ্ধাৰিত
+              শব্দটোত নাই।
+            </span>
+
           </div>
+
           <div>
-  প্ৰতিদিনৰ নিৰ্ধাৰিত শব্দটো পিছদিনা xobdle.org-ত চাব পাৰিব অথবা ই-মেইল যোগে জানিবলৈ ইয়াত 
-  <a href="https://forms.gle/kxedBJcrLZUyN2TFA" target="_blank" rel="noopener noreferrer">যোগ হওঁক</a>।
-</div>
+
+            প্ৰতিদিনৰ নিৰ্ধাৰিত শব্দটো পিছদিনা xobdle.org-ত চাব পাৰিব
+            অথবা ই-মেইল যোগে জানিবলৈ ইয়াত
+
+            <a
+              href="https://forms.gle/kxedBJcrLZUyN2TFA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              যোগ হওঁক
+            </a>।
+
+          </div>
+
         </div>
+
       </div>
+
     </div>
+
+    <!-- =======================================================
+         ABOUT
+    ======================================================== -->
+
+    <div
+      id="aboutOverlay"
+      class="info-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="aboutTitle"
+    >
+
+      <div class="info-card">
+
+        <button
+          class="info-close"
+          type="button"
+          data-close-info
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <h2 id="aboutTitle">
+          About Xobdle
+        </h2>
+
+        <p>
+          Xobdle is a free daily Assamese word-guessing game.
+          A new five-akshara Assamese word is served every day,
+          and players get five attempts to find it.
+        </p>
+
+        <p>
+          Xobdle was created to make playing with Assamese words
+          simple, quick and fun. No account is required to play.
+        </p>
+
+        <p>
+          A new Xobdle is available every day at 6:00 AM IST.
+        </p>
+
+        <h3>
+          Inspired by Wordle
+        </h3>
+
+        <p>
+          Xobdle is an independent game inspired by Wordle and
+          adapted for Assamese words and aksharas.
+        </p>
+
+        <p>
+          Xobdle is not affiliated with or endorsed by Wordle
+          or The New York Times.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================
+         CONTACT
+    ======================================================== -->
+
+    <div
+      id="contactOverlay"
+      class="info-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contactTitle"
+    >
+
+      <div class="info-card">
+
+        <button
+          class="info-close"
+          type="button"
+          data-close-info
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <h2 id="contactTitle">
+          Contact
+        </h2>
+
+        <p>
+          Found a problem, have a word suggestion, or want to
+          share feedback about Xobdle?
+        </p>
+
+        <p>
+          Email:
+          <a href="mailto:supportxobdle@gmail.com">
+            supportxobdle@gmail.com
+          </a>
+        </p>
+
+        <p>
+          Feedback and suggestions are always welcome.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================
+         PRIVACY
+    ======================================================== -->
+
+    <div
+      id="privacyOverlay"
+      class="info-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacyTitle"
+    >
+
+      <div class="info-card">
+
+        <button
+          class="info-close"
+          type="button"
+          data-close-info
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <h2 id="privacyTitle">
+          Privacy
+        </h2>
+
+        <p>
+          Xobdle does not require an account to play and does not
+          ask players to provide a name, phone number or other
+          personal information as part of the game.
+        </p>
+
+        <h3>
+          Game data
+        </h3>
+
+        <p>
+          Xobdle may store game-related information in your browser
+          so that features such as your current game, completed game
+          and daily-play status can work correctly.
+        </p>
+
+        <h3>
+          Website analytics
+        </h3>
+
+        <p>
+          Xobdle uses GoatCounter to understand general website usage,
+          such as visits to the site. This information helps understand
+          how Xobdle is being used and helps improve the game.
+        </p>
+
+        <h3>
+          Email updates
+        </h3>
+
+        <p>
+          Xobdle does not require an email address to play.
+          If you voluntarily choose to join Xobdle email updates,
+          you will be directed to a Google Form where you may provide
+          your email address.
+        </p>
+
+        <h3>
+          Third-party services
+        </h3>
+
+        <p>
+          Xobdle may rely on third-party services for functions such as
+          website analytics, website hosting and optional email sign-up.
+          Those services may process technical information according to
+          their own privacy policies.
+        </p>
+
+        <h3>
+          Sale of information
+        </h3>
+
+        <p>
+          Xobdle does not sell personal information.
+        </p>
+
+        <h3>
+          Changes to this privacy notice
+        </h3>
+
+        <p>
+          This privacy notice may be updated when Xobdle introduces
+          new features or services.
+        </p>
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+          For privacy questions, contact
+          <a href="mailto:supportxobdle@gmail.com">
+            supportxobdle@gmail.com
+          </a>.
+        </p>
+
+        <p class="info-small">
+          Last updated: 31 August 2026
+        </p>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <canvas id="resultCanvas" width="1080" height="1350"></canvas>
+  <!-- =========================================================
+       RESULT CANVAS
+  ========================================================== -->
+
+  <canvas
+    id="resultCanvas"
+    width="1080"
+    height="1350"
+  ></canvas>
+
+  <!-- =========================================================
+       IST CLOCK
+  ========================================================== -->
+
   <script>
+
     function updateISTClock() {
-      const clock = document.getElementById("istClock");
+
+      const clock =
+        document.getElementById("istClock");
+
       if (!clock) return;
 
-      const time = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hourCycle: "h23"
-      }).format(new Date());
+      const time =
+        new Intl.DateTimeFormat(
+          "en-GB",
+          {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hourCycle: "h23"
+          }
+        ).format(new Date());
 
-      clock.textContent = time + " IST";
+      clock.textContent =
+        time + " IST";
+
     }
 
     updateISTClock();
-    setInterval(updateISTClock, 1000);
+
+    setInterval(
+      updateISTClock,
+      1000
+    );
+
   </script>
 
+  <!-- =========================================================
+       ABOUT / CONTACT / PRIVACY LOGIC
+  ========================================================== -->
+
   <script>
-  const xobdleScript = document.createElement("script");
-  xobdleScript.src = "xobdle.js?v=" + Date.now();
-  document.body.appendChild(xobdleScript);
-</script>
- 
+
+    (() => {
+
+      const overlays = {
+
+        about:
+          document.getElementById("aboutOverlay"),
+
+        contact:
+          document.getElementById("contactOverlay"),
+
+        privacy:
+          document.getElementById("privacyOverlay")
+
+      };
+
+      function closeInfoOverlays() {
+
+        Object
+          .values(overlays)
+          .forEach(overlay => {
+
+            if (overlay) {
+              overlay.classList.add("hidden");
+            }
+
+          });
+
+      }
+
+      document
+        .querySelectorAll("[data-info-page]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              const page =
+                button.dataset.infoPage;
+
+              const overlay =
+                overlays[page];
+
+              if (!overlay) return;
+
+              closeInfoOverlays();
+
+              overlay
+                .classList
+                .remove("hidden");
+
+            }
+          );
+
+        });
+
+      document
+        .querySelectorAll("[data-close-info]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            closeInfoOverlays
+          );
+
+        });
+
+      Object
+        .values(overlays)
+        .forEach(overlay => {
+
+          if (!overlay) return;
+
+          overlay.addEventListener(
+            "click",
+            event => {
+
+              if (event.target === overlay) {
+                closeInfoOverlays();
+              }
+
+            }
+          );
+
+        });
+
+      document.addEventListener(
+        "keydown",
+        event => {
+
+          if (event.key === "Escape") {
+            closeInfoOverlays();
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+  <!-- =========================================================
+       EXISTING XOBDLE SCRIPT
+  ========================================================== -->
+
+  <script>
+
+    const xobdleScript =
+      document.createElement("script");
+
+    xobdleScript.src =
+      "xobdle.js?v=" + Date.now();
+
+    document.body.appendChild(
+      xobdleScript
+    );
+
+  </script>
+
 </body>
 </html>
